@@ -1,0 +1,65 @@
+spring:
+  cloud:
+    nacos:
+      server-addr: 10.100.20.243:8848
+      discovery:
+      config:
+        file-extension: yml
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    hikari:
+      auto-commit: true
+      connection-test-query: SELECT 1
+      connection-timeout: 30000
+      idle-timeout: 180000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      pool-name: MyHikariCP
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://${MYSQL_IP}:${MYSQL_PORT}/${MYSQL_DATABASE}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+  jpa:
+    database: MySQL
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+  redis:
+    database: ${REDIS_DATABASE}
+    host: ${REDIS_IP}
+    port: ${REDIS_PORT}
+    password: ${REDIS_PASSWORD}
+knife4j:
+  production: true
+logging:
+  config: 'classpath:logback-spring-prod.xml'
+  file:
+    name: logs/${spring.application.name}_error.log
+saas:
+  role:
+    code: SuperAdmin
+wxopen:
+  appid: wx95de8515af35942d
+  appsecret: 7869e176488b323f75a05aa55b42a14d
+  gatewayUrl: apiserver-saas-xux.woaap.com
+  redirectUrl: http://ka.etocdn.cn/26638/2021-06-08/26638_20210608175253352163997698.html#/pages/index/index
+  wechatUrl: https://api.woaap.com/api/oauth2-authorize?appid=%s&redirect_uri=%s&scope=snsapi_userinfo
+  accessTokenUrl: https://api.woaap.com/api/oauth2-accesstoken?ackey=%s&code=%s
+  ackeyUrl: https://api.woaap.com/api/ackey?appid=%s&appkey=%s
+  userUrl: https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN
+mail:
+  username: alerts@etocrm.com #发送邮件的邮箱地址
+  password: QtQqjzpdSrCpC9GR #客户端授权码，不是邮箱密码，这个在qq邮箱设置里面自动生成的
+cdn:
+  file:
+    url: https://oss-api.etocdn.cn/file/uploadByFile
+    AccessKey: 1402142691625668608
+    SecretyKey: d3463c0442004509bc25da91c63f41b3
+    Idcinfo: 1
+    Os: 12
+    OrgId: 414
+    brandsId: 73
+
+companyCallBackUrl: https://apiserver-saas-wux.woaap.com/saas/sysOrgCompany/callbackInfo

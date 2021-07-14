@@ -1,0 +1,39 @@
+server:
+  port: 21801
+spring:
+  profiles:
+    active: dev
+  application:
+    name: etocrm-saas-xxx
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 20MB
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+feign:
+  hystrix:
+    enabled: true
+ribbon:
+  eager-load:
+    enabled: true
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 1
+  ConnectTimeout: 1000
+  ReadTimeout: 5000
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000

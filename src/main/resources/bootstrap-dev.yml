@@ -1,0 +1,78 @@
+nacos:
+  group: ETOCRM-JAVA-DEV
+  namespace: etocrm-java-dev
+spring:
+  cloud:
+    nacos:
+      server-addr: 10.100.20.243:8848
+      discovery:
+        group: ${nacos.group}
+        namespace: ${nacos.namespace}
+      config:
+        file-extension: yml
+        group: ${nacos.group}
+        namespace: ${nacos.namespace}
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    hikari:
+      auto-commit: true
+      connection-test-query: SELECT 1
+      connection-timeout: 30000
+      idle-timeout: 180000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      pool-name: MyHikariCP
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://10.100.20.113:4000/uam_dev?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: dev_root
+    password: $x:wM.6h>gcS
+  jpa:
+    database: MySQL
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+  redis:
+    database: 10
+    host: 10.100.20.243
+    port: 6379
+    password: 123456
+knife4j:
+  production: false
+  enable: true
+logging:
+  file:
+    name: logs/${spring.application.name}_out.log
+  level:
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+  config: 'classpath:logback-spring.xml'
+saas:
+  role:
+    code: SuperAdmin
+cdn:
+  file:
+    url: https://oss-api.etocdn.cn/file/uploadByFile
+    AccessKey: 1402142691625668608
+    SecretyKey: d3463c0442004509bc25da91c63f41b3
+    Idcinfo: 1
+    Os: 12
+    OrgId: 414
+    brandsId: 73
+wxopen:
+  appid: a9a143a50ce783c2ec4221801bf4d9a9
+  appsecret: 185a313a29bdcb2cee36b626f65a0a6b
+  gatewayUrl: apiserver-saas-sit.woaap.com
+  redirectUrl: http://ka-sit.etocdn.cn/704/2021-04-15/704_20210415182258146154048256.html#/pages/index/index
+  wechatUrl: https://api-test.woaap.com/api/oauth2-authorize?appid=%s&redirect_uri=%s&scope=snsapi_userinfo
+  accessTokenUrl: https://api-test.woaap.com/api/oauth2-accesstoken?ackey=%s&code=%s
+  ackeyUrl: https://api-test.woaap.com/api/ackey?appid=%s&appkey=%s
+  userUrl: https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN
+
+mail:
+  username: alerts@etocrm.com #发送邮件的邮箱地址
+  password: QtQqjzpdSrCpC9GR #客户端授权码，不是邮箱密码，这个在qq邮箱设置里面自动生成的
+
+companyCallBackUrl: https://apiserver-saas-sit.woaap.com/saas/sysOrgCompany/callbackInfo
+
